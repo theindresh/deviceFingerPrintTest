@@ -8,11 +8,13 @@ function App() {
 
   useEffect(() => {
     const getFingerprint = async () => {
-      const fingerprint = await getDeviceFingerprint();
+      const result = await getDeviceFingerprint();
+      console.log(result, "Fingerprint data");
+      
 
       // Simulate a delay (e.g., 2 seconds)
       setTimeout(() => {
-        setFingerprint(fingerprint);
+        setFingerprint(result);
         setLoading(false);
       }, 2000);
     };
@@ -47,6 +49,8 @@ function App() {
           <>
             <p className="text-gray-700 text-lg mb-3">Your Device ID is:</p>
             <div className="bg-gray-100 p-6 rounded-xl text-gray-800 text-sm font-mono break-all shadow-inner">
+              {fingerprint?.data?.BrowserId || "Unavailable"}
+              <br />
               {fingerprint?.data?.deviceId || "Unavailable"}
             </div>
           </>
